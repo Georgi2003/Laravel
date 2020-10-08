@@ -4,7 +4,7 @@ body
 	font-family: 'Slabo 27px', serif;
 }
 
-input[type=text], input[type=password], input[type=number], button 
+input[type=text], input[type=password], input[type=number]/*, button*/ 
 {
   width: 25%;
   padding: 12px 20px;

@@ -18,15 +18,15 @@ Route::get('/', 'HomeController@index');
 Route::get('/account', 'HomeController@profile');
 
 Route::resource('/employees', 'EmployeeController');
-Route::get('/employeesInsert', 'EmployeeController@store');
+/*Route::get('/employeesInsert', 'EmployeeController@store');
 Route::get('/employeesUpdate', 'EmployeeController@update');
-Route::get('/employeesDelete', 'EmployeeController@destroy');
+Route::get('/employeesDelete', 'EmployeeController@destroy');*/
 
-Route::get('/login', 'EmployeeController@login_form');
-Route::post('/login', 'EmployeeController@login');
+// Route::get('/login', 'EmployeeController@login_form');
+// Route::post('/login', 'EmployeeController@login');
 
-Route::get('/register', 'EmployeeController@create');
-Route::post('/register', 'EmployeeController@store');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
-Route::get('/update', 'EmployeeController@edit');
-Route::post('/update', 'EmployeeController@update');
+

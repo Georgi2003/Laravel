@@ -2,9 +2,9 @@
 <html>	
 	<head>
 		<title>Магазин</title>
-		<link rel = "stylesheet" href = "css/default.css"></link>
+		<link rel = "stylesheet" href = "{{asset('css/default.css')}}"></link>
 		
-		<link href = "img/avatar.jpg" rel = "shortcut icon" type="image/x-icon">
+		<link href = "{{asset('img/avatar.jpg')}}" rel = "shortcut icon" type="image/x-icon">
 	</head>
 
 	<body>
@@ -18,7 +18,7 @@
 			<li style = "float: right;"><a href = "{{url('login')}}">Вход</a></li>
 		</ul>
 		<br>
-		<img src = "img/avatar_accaunt.gif" style="width: 300px; height:300px"> 
+		<img src = "{{asset('img/avatar_accaunt.gif')}}" style="width: 300px; height:300px"> 
 	    <div class="container">
 	        @yield('log')
 	    </div>

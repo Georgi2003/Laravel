@@ -7,38 +7,6 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    public function login_form()
-    {
-        return view('auth.login', [
-            'nameTitle' => 'Вход'
-        ]);
-    }
-
-    public function login(Request $request)
-    {
-        $first_name = $request['first_name'];
-        $last_name = $request['last_name'];
-
-        if($first_name != '' && $last_name != '')
-        {
-            $employees = Employee::where('first_name', $first_name)
-            ->where('last_name', $last_name)
-            ->get();
-
-            return view('employees.index', [
-                'allEmployees' => $employees,
-                'nameTitle' => 'Служители',
-                'message' => 'Добре дошли ' . $first_name . '!!!',
-                'log' => true
-            ]);
-        }
-        else
-        {
-            return view('auth.login', [
-                'nameTitle' => 'Вход'
-            ]);
-        }
-    }
     /**
      * Display a listing of the resource.
      *
@@ -63,7 +31,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('auth.register', [
+        return view('employees.registerEmployee', [
             'nameTitle' => 'Регистрация'
         ]);
     }
@@ -82,18 +50,28 @@ class EmployeeController extends Controller
         $address = $request['address'];
         $job_title = $request['job_title'];   
 
-        $employee = new Employee;
+        if($first_name != '')
+        {
+            $employee = new Employee;
 
-        $employee->first_name = $first_name;
-        $employee->last_name = $last_name;
-        $employee->phone = $phone;
-        $employee->address = $address;
-        $employee->job_title = $job_title;
+            $employee->first_name = $first_name;
+            $employee->last_name = $last_name;
+            $employee->phone = $phone;
+            $employee->address = $address;
+            $employee->job_title = $job_title;
 
-        $employee->save();
-        return view('auth.register', [
-            'nameTitle' => 'Регистрация'
-        ]) . "Регистрацията беше запазена успешно!!!";
+            $employee->save();
+
+            return view('employees.registerEmployee', [
+                'nameTitle' => 'Регистрация'
+            ]) . "Регистрацията беше запазена успешно!!!";
+        }
+        else
+        {
+            return view('employees.registerEmployee', [
+                'nameTitle' => 'Регистрация'
+            ]);
+        }
     }
 
     /**
@@ -115,8 +93,9 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        return view('auth.update',[
-            'nameTitle' => 'Актуализация'
+        return view('employees.edit',[
+            'nameTitle' => 'Актуализация',
+            'employee' => $employee
         ]);
     }
 
@@ -129,18 +108,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        $first_name = $request['first_name'];
-        $last_name = $request['last_name'];
-
-        $employees = Employee::where('first_name', $first_name)
-        ->where('last_name', $last_name)
-        ->get();
-        
+        dd($request);
         $phone = $request['phone']; 
         $address = $request['address'];
         $job_title = $request['job_title'];
 
-        $employee = Employee::find($employees[0]->id);
+        $employee = Employee::find($id);
 
         $employee->phone = $phone;
         $employee->address = $address;
@@ -159,10 +132,12 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Request $request, Employee $employee, $id)
     {
-        $employee = Employee::find(10);
+        $employee = Employee::find($request['id']);
 
         $employee->delete();
+
+        return redirect()->back();
     }
 }
