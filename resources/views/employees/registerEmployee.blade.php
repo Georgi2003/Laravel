@@ -3,6 +3,17 @@
 @section('title', 'Login')
 
 @section('log')
+
+	@if ($errors->any())
+	    <div class="alert alert-danger">
+	        <ul id = "error">
+	            @foreach ($errors->all() as $error)
+	                <li>{{ $error }}</li>
+	            @endforeach
+	        </ul>
+	    </div>
+	@endif
+
 	<form method="post" action = "/employees"> 
     	{{csrf_field()}}
 		<input type = "text" name = "first_name" placeholder = "Въведете име">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Http\Requests\EmployeeUpdateRequests;
+use App\Http\Requests\EmployeeStoreRequest;
 
 class EmployeeController extends Controller
 {
@@ -43,7 +45,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Employee $employee)
+    public function store(EmployeeStoreRequest $request, Employee $employee)
     {
         //dd($employee);
         $first_name = $request['first_name']; 
@@ -108,9 +110,10 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(EmployeeUpdateRequests $request, Employee $employee)
     {
-        //dd($employee);
+        // dd($employee);
+
         $phone = $request['phone']; 
         $address = $request['address'];
         $job_title = $request['job_title'];

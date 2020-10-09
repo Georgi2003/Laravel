@@ -3,6 +3,17 @@
 <?php $__env->startSection('title', 'Login'); ?>
 
 <?php $__env->startSection('log'); ?>
+
+	<?php if($errors->any()): ?>
+	    <div class="alert alert-danger">
+	        <ul id = "error">
+	            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+	                <li><?php echo e($error); ?></li>
+	            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+	        </ul>
+	    </div>
+	<?php endif; ?>
+
 	<form method="post" action = "/employees"> 
     	<?php echo e(csrf_field()); ?>
 
