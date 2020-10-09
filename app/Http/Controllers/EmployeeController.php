@@ -20,6 +20,7 @@ class EmployeeController extends Controller
             'allEmployees' => $employees,
             'nameTitle' => 'Служители',
             'message' => '',
+            'num' => 1,
             'log' => false
         ]);
     }
@@ -42,8 +43,9 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Employee $employee)
     {
+        //dd($employee);
         $first_name = $request['first_name']; 
         $last_name = $request['last_name'];
         $phone = $request['phone']; 
@@ -108,12 +110,10 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        dd($request);
+        //dd($employee);
         $phone = $request['phone']; 
         $address = $request['address'];
         $job_title = $request['job_title'];
-
-        $employee = Employee::find($id);
 
         $employee->phone = $phone;
         $employee->address = $address;
@@ -121,9 +121,7 @@ class EmployeeController extends Controller
 
         $employee->save();
 
-        return view('auth.update',[
-            'nameTitle' => 'Актуализация'
-        ]);
+        return redirect()->back();
     }
 
     /**
@@ -132,10 +130,8 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Employee $employee, $id)
+    public function destroy(Request $request, Employee $employee)
     {
-        $employee = Employee::find($request['id']);
-
         $employee->delete();
 
         return redirect()->back();

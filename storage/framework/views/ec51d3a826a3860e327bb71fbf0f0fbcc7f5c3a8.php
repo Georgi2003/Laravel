@@ -3,7 +3,7 @@
 <?php $__env->startSection('title', 'Login'); ?>
 
 <?php $__env->startSection('log'); ?>
-	<form method="post" action = "./registerEmployee"> 
+	<form method="post" action = "/employees"> 
     	<?php echo e(csrf_field()); ?>
 
 		<input type = "text" name = "first_name" placeholder = "Въведете име">

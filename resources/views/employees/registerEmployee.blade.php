@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('log')
-	<form method="post" action = "./registerEmployee"> 
+	<form method="post" action = "/employees"> 
     	{{csrf_field()}}
 		<input type = "text" name = "first_name" placeholder = "Въведете име">
 		<br>

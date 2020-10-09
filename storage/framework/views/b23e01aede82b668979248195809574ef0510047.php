@@ -7,15 +7,12 @@
     	<?php echo e(csrf_field()); ?>
 
     	<?php echo method_field('PUT'); ?>
-		<input type = "text" name = "first_name" placeholder = "Въведете име" value="<?php echo e($employee->first_name); ?>">
+
+		<input type = "number" name = "phone" placeholder = "Въведете телефон" value="<?php echo e($employee->phone); ?>">
 		<br>
-		<input type = "text" name = "last_name" placeholder = "Въведете фамилия">
+		<input type = "text" name = "address" placeholder = "Въведете адрес" value="<?php echo e($employee->address); ?>">
 		<br>
-		<input type = "number" name = "phone" placeholder = "Въведете телефон">
-		<br>
-		<input type = "text" name = "address" placeholder = "Въведете адрес">
-		<br>
-		<input type = "text" name = "job_title" placeholder = "Въведете длъжност">
+		<input type = "text" name = "job_title" placeholder = "Въведете длъжност" value="<?php echo e($employee->job_title); ?>">
 		<br>
 		<input type = "submit" name = "submit" value="Запази">	
 	</form>
